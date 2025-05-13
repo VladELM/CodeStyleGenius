@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Moving : MonoBehaviour
@@ -22,7 +21,7 @@ public class Moving : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _currentTarget.position,
                                                 _speed * Time.deltaTime);
 
-        if (transform.position == _currentTarget.position)
+        if (IsDistanceZero())
             _currentTarget = GetTarget();
     }
 
@@ -32,9 +31,22 @@ public class Moving : MonoBehaviour
             _targetIndex = 0;
 
         Transform target = _targets[_targetIndex];
+        transform.forward = target.position - transform.position;
         _targetIndex++;
         
         return target;
+    }
+
+    private bool IsDistanceZero()
+    {
+        bool isZero = false;
+        Vector3 offset = _currentTarget.position - transform.position;
+        float offsetSquare = offset.sqrMagnitude;
+
+        if (offsetSquare == 0)
+            isZero = true;
+
+        return isZero;
     }
 
     #if UNITY_EDITOR
