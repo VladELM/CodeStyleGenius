@@ -6,12 +6,20 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
+    private Rigidbody _rigidbody;
+
+    private void Awake()
+    {
+        if (TryGetComponent(out Rigidbody rigidbody))
+            _rigidbody = rigidbody;
+    }
+
     public void Initialize(Vector3 direction)
     {
         if (TryGetComponent(out Rigidbody rigidbody))
         {
-            rigidbody.transform.up = direction;
-            rigidbody.velocity = direction * _speed;
+            _rigidbody.transform.up = direction;
+            _rigidbody.velocity = direction * _speed;
         }
     }
 }
