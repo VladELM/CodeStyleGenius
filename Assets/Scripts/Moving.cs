@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class Moving : MonoBehaviour
 {
     [SerializeField] private Transform _targetsParent;
     [SerializeField] private float _speed;
@@ -11,9 +11,8 @@ public class Move : MonoBehaviour
     private Transform _currentTarget;
     private int _targetIndex;
     
-    void Start()
+    private void Start()
     {
-        _targets = _targetsParent.GetComponentsInChildren<Transform>().ToList();
         _targetIndex = 0;
         _currentTarget = GetTarget();
     }
@@ -37,4 +36,23 @@ public class Move : MonoBehaviour
         
         return target;
     }
+
+    #if UNITY_EDITOR
+    [ContextMenu("FillChildList")]
+
+    private void FillChildList()
+    {
+        _targets = new List<Transform>();
+        int chiledAmout = _targetsParent.childCount;
+
+        for (int i = 0; i < chiledAmout; i++)
+        {
+            Transform transform = _targetsParent.GetChild(i);
+
+            if (transform.TryGetComponent(out Target component))
+                _targets.Add(transform);
+        }
+    }
+
+    #endif
 }

@@ -8,7 +8,7 @@ public class BulletShooting : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _delay;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(Shooting());
     }
@@ -19,12 +19,12 @@ public class BulletShooting : MonoBehaviour
 
         while (enabled)
         {
-            SetVelocity();
+            Shoot();
             yield return delay;
         }
     }
 
-    private void SetVelocity()
+    private void Shoot()
     {
         Vector3 direction = (_shootTarget.position - transform.position).normalized;
         Bullet bullet = Instantiate(_prefab, transform.position, Quaternion.identity);
