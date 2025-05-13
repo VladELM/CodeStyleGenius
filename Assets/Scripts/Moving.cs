@@ -6,8 +6,8 @@ public class Moving : MonoBehaviour
 {
     [SerializeField] private Transform _targetsParent;
     [SerializeField] private float _speed;
+    [SerializeField] private List<Transform> _targets;
 
-    private List<Transform> _targets;
     private Transform _currentTarget;
     private int _targetIndex;
     
@@ -39,7 +39,6 @@ public class Moving : MonoBehaviour
 
     #if UNITY_EDITOR
     [ContextMenu("FillChildList")]
-
     private void FillChildList()
     {
         _targets = new List<Transform>();

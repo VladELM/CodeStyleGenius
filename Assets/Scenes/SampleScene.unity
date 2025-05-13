@@ -1050,6 +1050,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetsParent: {fileID: 1143234515}
   _speed: 3
+  _targets:
+  - {fileID: 93657848}
+  - {fileID: 1672024992}
+  - {fileID: 1454681203}
+  - {fileID: 1688954237}
 --- !u!1 &2085337207
 GameObject:
   m_ObjectHideFlags: 0
